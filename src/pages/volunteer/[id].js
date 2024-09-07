@@ -11,6 +11,7 @@ export default function VolunteerProfile() {
 
   useEffect(() => {
     if (id) {
+      // Fetch the volunteer's data from the backend
       axios.get(`http://localhost:8000/volunteer/?id=${id}`)
         .then((response) => {
           setVolunteer(response.data);
