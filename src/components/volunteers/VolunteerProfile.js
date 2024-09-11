@@ -52,24 +52,28 @@ const VolunteerProfile = ({ volunteerData }) => {
           {/* Tabs for navigation */}
           <div className="tabs">
             <button
+              data-testid="skills-tab"
               className={`tab-button ${activeTab === 'skills' ? 'active' : ''}`}
               onClick={() => handleTabChange('skills')}
             >
               Skills
             </button>
             <button
+              data-testid="interests-tab"
               className={`tab-button ${activeTab === 'interests' ? 'active' : ''}`}
               onClick={() => handleTabChange('interests')}
             >
               Interests
             </button>
             <button
+              data-testid="contributions-tab"
               className={`tab-button ${activeTab === 'contributions' ? 'active' : ''}`}
               onClick={() => handleTabChange('contributions')}
             >
               Contributions
             </button>
             <button
+              data-testid="projects-tab"
               className={`tab-button ${activeTab === 'projects' ? 'active' : ''}`}
               onClick={() => handleTabChange('projects')}
             >
