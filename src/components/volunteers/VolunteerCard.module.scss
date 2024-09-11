@@ -1,0 +1,63 @@
+.volunteerCard {
+  background: white;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.375rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.volunteerHeader {
+  display: flex;
+  align-items: center;
+}
+
+.volunteerCardImg {
+  width: 9rem;
+  height: 9rem;
+  border-radius: 50%;
+  margin-right: 2rem;
+}
+
+.volunteerInfo {
+  h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  p {
+    &.bio {
+      font-size: 1.125rem;
+    }
+
+    &.location {
+      color: #4a5568;
+    }
+  }
+}
+
+.certificates,
+.volunteerRole,
+.volunteerMemberships {
+  margin-top: 1rem;
+
+  p {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  ul {
+    margin-left: 0.5rem;
+
+    li {
+      font-size: 0.875rem;
+    }
+  }
+
+  a {
+    color: #3b82f6; // Tailwind blue
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
