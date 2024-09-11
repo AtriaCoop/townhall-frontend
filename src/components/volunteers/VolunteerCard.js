@@ -1,3 +1,6 @@
+// This React component renders a volunteer card displaying the volunteer's information such as profile picture, name, bio, location, certificates, role, organization, and memberships.
+// It uses conditional rendering to display bio, certificates, and memberships based on the data available, and applies styles from an SCSS module.
+
 import React from 'react';
 import styles from './VolunteerCard.module.scss';
 

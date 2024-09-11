@@ -1,3 +1,7 @@
+// This component renders a volunteer's profile page, fetching volunteer data if it's not passed as a prop.
+// It displays the volunteer's details including skills, interests, contributions, and projects.
+// Tabs are used to switch between different sections, and a loading/error state is managed during data fetching.
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
@@ -7,49 +11,55 @@ const VolunteerProfile = ({ volunteerData }) => {
   const router = useRouter();
   const { id } = router.query;
 
+  // State to store volunteer data, loading, and error messages
   const [volunteer, setVolunteer] = useState(volunteerData || null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true); // Track loading state
-  const [activeTab, setActiveTab] = useState('skills');
+  const [activeTab, setActiveTab] = useState('skills'); // Default active tab
 
+  // Fetch volunteer data when the component mounts if not provided via props
   useEffect(() => {
     if (id && !volunteerData) {
       axios.get(`http://localhost:8000/volunteer/?id=${id}`)
         .then((response) => {
-          setVolunteer(response.data);
+          setVolunteer(response.data); // Set volunteer data from API response
           setLoading(false); // Stop loading once data is received
         })
         .catch((error) => {
-          console.error(error);
-          setError('Failed to load volunteer details');
+          console.error(error); // Log the error for debugging
+          setError('Failed to load volunteer details'); // Set error message
           setLoading(false); // Stop loading on error
         });
     }
-  }, [id, volunteerData]);
+  }, [id, volunteerData]); // Re-run effect if id or volunteerData changes
 
+  // Display loading message while data is being fetched
   if (loading) {
     return <div className="loading-message">Loading...</div>; // Ensure loading message
   }
 
+  // Display error message if data fetching fails
   if (error) {
     return <div className="error-message">{error}</div>;
   }
 
+  // Display message if no volunteer data is available
   if (!volunteer) {
     return <div>No volunteer data available</div>;
   }
 
   // Function to handle tab switching
   const handleTabChange = (tab) => {
-    setActiveTab(tab);
+    setActiveTab(tab); // Set the currently active tab
   };
 
   return (
     <article className="volunteer-profile">
       <header className="profile-header">
+        {/* Display the volunteer's main profile information */}
         <VolunteerCard volunteer={volunteer} showBio={true} />
         <section className="profile-details">
-          {/* Tabs for navigation */}
+          {/* Tabs for navigating between different sections */}
           <div className="tabs">
             <button
               data-testid="skills-tab"
@@ -152,6 +162,7 @@ const VolunteerProfile = ({ volunteerData }) => {
         </section>
       </header>
 
+      {/* Sidebar with additional actions and follower list */}
       <section className="volunteer-sidebar">
         <div className="actions">
           <button className="btn follow">Follow</button>
