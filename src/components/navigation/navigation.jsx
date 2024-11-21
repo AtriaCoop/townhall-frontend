@@ -1,23 +1,37 @@
+import styles from '../../styles/navigation.module.scss';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Navigation() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid">
-        <Link href="/" className="navbar-brand">Atria</Link>
+    <nav className={`navbar navbar-expand-lg navbar-light bg-light ${styles.navigation}`}>
+      <div className="container-fluid d-flex justify-content-between align-items-center">
+        {/* Logo on the left */}
+        <h1 className={`${styles.logo} navbar-brand`}>Atria</h1>
+
+        {/* Burger menu (for mobile) */}
         <button
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
           aria-controls="navbarNav"
-          aria-expanded="false"
+          aria-expanded={isOpen ? 'true' : 'false'}
           aria-label="Toggle navigation"
+          onClick={toggleMenu}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
+
+        {/* Navigation links */}
+        <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`} id="navbarNav">
+          <ul className="navbar-nav ms-auto"> {/* This pushes the nav links to the right */}
             <li className="nav-item">
               <Link href="/" className="nav-link">Home</Link>
             </li>
