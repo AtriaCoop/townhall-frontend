@@ -1,55 +1,16 @@
 .navigation {
-  background-color: #f8f9fa; /* Light background color */
-  padding: 1rem 2rem; /* Padding around the navbar */
-  
-  .navbar-brand {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #333; /* Dark color for logo */
-    text-transform: uppercase;
-  }
+  position: absolute; /* Makes sure it's placed on top of the header */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10; /* Ensures it stays above the header */
+  background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent background */
+}
 
-  .navbar-nav {
-    display: flex;
-    list-style: none;
-    padding-left: 0;
-  }
+.navbar-light .navbar-nav .nav-link {
+  color: white; /* Adjust link color for visibility on the background image */
+}
 
-  .nav-item {
-    margin-left: 30px;
-  }
-
-  .nav-link {
-    font-size: 1.1rem;
-    color: #333; /* Dark color for text */
-    text-transform: uppercase;
-    padding: 8px 15px;
-    transition: color 0.3s ease;
-
-    &:hover {
-      color: #007bff; /* Change text color on hover */
-    }
-  }
-
-  /* Navbar Toggler - Mobile */
-  .navbar-toggler {
-    border: none;
-  }
-
-  .navbar-toggler-icon {
-    background-color: #333; /* Dark icon */
-  }
-
-  /* Mobile styles */
-  @media (max-width: 991px) {
-    .navbar-nav {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .nav-item {
-      margin-left: 0;
-      margin-bottom: 15px;
-    }
-  }
+.navbar-light .navbar-brand {
+  color: white; /* Adjust logo color for visibility */
 }
