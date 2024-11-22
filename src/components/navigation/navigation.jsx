@@ -10,7 +10,7 @@ export default function Navigation() {
   };
 
   return (
-    <nav className={`navbar navbar-expand-lg navbar-light bg-light ${styles.navigation}`}>
+    <nav className={`navbar navbar-expand-lg navbar-light bg-transparent ${styles.navigation}`}>
       <div className="container-fluid d-flex justify-content-between align-items-center">
         {/* Logo on the left */}
         <h1 className={`${styles.logo} navbar-brand`}>Atria</h1>
