@@ -10,7 +10,7 @@ export default function Navigation() {
   };
 
   return (
-    <nav className={`navbar navbar-expand-lg navbar-light bg-light ${styles.navigation}`}>
+    <nav className={`navbar navbar-expand-lg navbar-light bg-transparent ${styles.navigation}`}>
       <div className="container-fluid d-flex justify-content-between align-items-center">
         {/* Logo on the left */}
         <h1 className={`${styles.logo} navbar-brand`}>Atria</h1>
@@ -36,13 +36,13 @@ export default function Navigation() {
               <Link href="/" className="nav-link">Home</Link>
             </li>
             <li className="nav-item">
-              <Link href="/opportunities" className="nav-link">Opportunities</Link>
+              <Link href="/opportunity" className="nav-link">Opportunities</Link>
             </li>
             <li className="nav-item">
-              <Link href="/communities" className="nav-link">Communities</Link>
+              <Link href="/community" className="nav-link">Communities</Link>
             </li>
             <li className="nav-item">
-              <Link href="/events" className="nav-link">Events</Link>
+              <Link href="/event" className="nav-link">Events</Link>
             </li>
             <li className="nav-item">
               <Link href="/profile" className="nav-link">My Profile</Link>
