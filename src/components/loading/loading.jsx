@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../../styles/header.module.scss';
+import styles from '../../styles/loading.module.scss';
 
-export default function Header() {
+export default function Loading() {
     const [visibleLogos, setVisibleLogos] = useState([]);
     const [showScreen, setShowScreen] = useState(false); // State to toggle between logo and new screen
 
@@ -28,7 +28,7 @@ export default function Header() {
     }, []);
 
     return (
-        <div className={styles.header}>
+        <div className={styles.loading}>
             {!showScreen ? (
                 // Logo sequence
                 visibleLogos.map((logo, index) => (
