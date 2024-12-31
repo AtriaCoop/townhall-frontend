@@ -14,14 +14,14 @@ export default function Header() {
 
         logoSequence.forEach((logo, index) => {
             setTimeout(() => {
-                setVisibleLogos((prev) => [...prev, logo.src]); // Add each part of the logo after a delay
+                setVisibleLogos((prev) => [...prev, logo.src]);
             }, logo.delay);
         });
 
         // After the final logo finishes loading, transition to the new screen
-        const totalDuration = logoSequence[logoSequence.length - 1].delay + 1500; // Adjust to match the animation timing
+        const totalDuration = logoSequence[logoSequence.length - 1].delay + 1500;
         setTimeout(() => {
-            setShowScreen(true); // Show the new screen
+            setShowScreen(true);
         }, totalDuration);
 
         return () => clearTimeout(); // Cleanup
