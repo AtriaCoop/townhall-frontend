@@ -3,12 +3,13 @@ import styles from '../../styles/header.module.scss';
 
 export default function Header() {
     const [visibleLogos, setVisibleLogos] = useState([]);
+    const [showScreen, setShowScreen] = useState(false); // State to toggle between logo and new screen
 
     useEffect(() => {
         const logoSequence = [
             { src: '/assets/redLogo.png', delay: 0 },
-            { src: '/assets/yellowLogo.png', delay: 1000 },
-            { src: '/assets/blueLogo.png', delay: 2000 },
+            { src: '/assets/yellowLogo.png', delay: 750 },
+            { src: '/assets/blueLogo.png', delay: 1400 },
         ];
 
         logoSequence.forEach((logo, index) => {
@@ -16,18 +17,38 @@ export default function Header() {
                 setVisibleLogos((prev) => [...prev, logo.src]); // Add each part of the logo after a delay
             }, logo.delay);
         });
+
+        // After the final logo finishes loading, transition to the new screen
+        const totalDuration = logoSequence[logoSequence.length - 1].delay + 1500; // Adjust to match the animation timing
+        setTimeout(() => {
+            setShowScreen(true); // Show the new screen
+        }, totalDuration);
+
+        return () => clearTimeout(); // Cleanup
     }, []);
 
     return (
         <div className={styles.header}>
-            {visibleLogos.map((logo, index) => (
-                <img
-                    key={index}
-                    src={logo}
-                    alt={`Logo part ${index + 1}`}
-                    className={styles.logo}
-                />
-            ))}
+            {!showScreen ? (
+                // Logo sequence
+                visibleLogos.map((logo, index) => (
+                    <img
+                        key={index}
+                        src={logo}
+                        alt={`Logo part ${index + 1}`}
+                        className={styles.logo}
+                    />
+                ))
+            ) : (
+                // New screen
+                <div className={styles.newScreen}>
+                    <h1>Are you an individual or organization?</h1>
+                    <img src="/assets/logo.png" alt="" />
+                    <button className={`${styles.button} ${styles.individualButton}`}>Individual</button>
+                    <button className={`${styles.button} ${styles.organizationButton}`}>Organization</button>
+                    <p>Already have an account? <a href="/login">Sign in</a></p>
+                </div>
+            )}
         </div>
     );
 }
