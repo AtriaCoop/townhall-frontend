@@ -1,11 +1,9 @@
-import Navigation from '@/components/navigation/navigation.jsx'
-import Footer from '@/components/footer/footer.jsx'
-import Header from '@/components/header/header.jsx';
+import Loading from '@/components/loading/loading.jsx';
 
 export default function Home() {
   return (
     <div className="home">
-        <Header />
+        <Loading />
     </div>
   );
 }
