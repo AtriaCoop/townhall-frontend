@@ -43,7 +43,7 @@ export default function Loading() {
                 // New screen
                 <div className={styles.newScreen}>
                     <h1>Are you an individual or organization?</h1>
-                    <img src="/assets/logo.png" alt="" />
+                    <img src="/assets/logo.png" alt="logo" />
                     <button className={`${styles.button} ${styles.individualButton}`}>Individual</button>
                     <button className={`${styles.button} ${styles.organizationButton}`}>Organization</button>
                     <p>Already have an account? <a href="/login">Sign in</a></p>
