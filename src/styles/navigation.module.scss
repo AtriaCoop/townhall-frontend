@@ -1,14 +1,18 @@
-.logo {
-  font-size: 2rem;
-  font-weight: bold;
+.navigation {
+  padding: 1rem;
+  border-bottom: solid silver;
+
+  img {
+    height: 14vh;
+  }
 }
 
 .navbarCollapse {
   position: absolute;
   border-style: groove;
   border-color: yellow;
-  top: 60px;
-  right: 10px;
+  top: 90px;
+  right: 40px;
   left: auto;
   background-color: white;
   z-index: 1000;

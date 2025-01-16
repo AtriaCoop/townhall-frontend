@@ -50,7 +50,6 @@ export default function Loading() {
                     <button className={`${styles.button} ${styles.individualButton}`} onClick={() => setShowIndividualScreen(true)}>Individual</button>
                     <button className={`${styles.button} ${styles.organizationButton}`} onClick={() => setShowOrganizationScreen(true)}>Organization</button>
                     <p className={styles.modalFooter}>Already have an account? <a className={styles.signIn} href="#" onClick={(e) => {e.preventDefault(); setShowSignInScreen(true)}}>Sign in</a></p>
-                </div>
                 
             ) : showSignInScreen ? (
 
