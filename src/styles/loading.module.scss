@@ -1,9 +1,10 @@
+/* General Styles */
 .loading {
-    height: 100vh; // Full viewport height
+    height: 100vh;
     width: 100%;
     display: flex;
-    justify-content: center; // Center horizontally
-    align-items: center; // Center vertically
+    justify-content: center;
+    align-items: center;
     position: relative;
     background-image: url('/assets/loading.png');
     background-size: cover;
@@ -12,8 +13,8 @@
 
 .logo {
     width: 150px;
-    height: auto; // Maintain aspect ratio
-    animation: fadeIn 1s ease-in-out; // Smooth appearance for each part
+    height: auto;
+    animation: fadeIn 1s ease-in-out;
     position: absolute;
 }
 
@@ -26,61 +27,169 @@
     }
 }
 
-.newScreen {
+/* Modal Styles */
+.modal, .signInModal {
+    width: 90%;
+    max-width: 792px;
+    height: auto;
+    padding: 30px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+}
+
+.modalTitle, .signInModalTitle {
+    font-size: 2.5rem;
+    font-weight: bold;
     text-align: center;
-    background-color: white;
-    border-radius: 8px;
-    padding: 3rem 5rem 4rem 5rem;
+    color: #090914;
+    margin-bottom: 20px;
+}
 
-    h1 {
-        font-weight: 600;
+.modalLogo {
+    width: 92px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.modalFooter, .signInFooter {
+    color: #71717A;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Buttons */
+.individualButton, .organizationButton,
+.signInButton, .googleSignInButton {
+    width: 100%;
+    max-width: 472px;
+    height: 50px;
+    font-size: 1rem;
+    border-radius: 9px;
+    border: none;
+    cursor: pointer;
+}
+
+.individualButton {
+    background-color: #01617B;
+    color: white;
+}
+
+.organizationButton {
+    background-color: #FFD45C;
+    color: black;
+}
+
+.signInButton {
+    background-color: #01617B;
+    color: #FFFFFF;
+}
+
+.googleSignInButton {
+    background-color: #F8FAFC;
+    color: #1E293B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Forms */
+.form {
+    width: 100%;
+    max-width: 472px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.email, .password {
+    width: 100%;
+    height: 65px;
+    border: 1px solid #E4E4E7;
+    border-radius: 9px;
+    padding: 10px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* Options */
+.options {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.rememberMe {
+    color: #090914;
+    margin-left: 8px;
+}
+
+.forgotPw {
+    text-decoration: none;
+    color: #090914;
+}
+
+/* Links */
+.signIn, .signUp {
+    text-decoration: none;
+    color: #01617B;
+    font-weight: bold;
+}
+
+.googleLogo {
+    width: 24px;
+    height: auto;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .modal, .signInModal {
+        padding: 20px;
+    }
+
+    .modalTitle, .signInModalTitle {
         font-size: 2rem;
-        margin-bottom: 20px;
     }
 
-    img {
-        height: 5rem;
-        margin-bottom: 1.5rem;
+    .modalLogo {
+        width: 72px;
     }
 
-    .button {
-        display: block;
-        width: 75%;
-        margin: 1rem auto;
-        padding: 1rem;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        border: none;
-        border-radius: 5px;
-        color: #fff;
-        transition: background-color 0.3s;
-    }
-
-    .individualButton {
-        background: #01617B;
-    }
-
-    .organizationButton {
-        color: black;
-        background: #FFD45C;
-    }
-
-    a {
-        color: #007bff;
-        text-decoration: none;
-
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
-    p {
-        color: #71717A;
-        font-size: 14px;
-        margin-bottom: -1rem;
-        margin-top: 2rem;
+    .signInButton, .googleSignInButton {
+        height: 45px;
     }
 }
 
+@media (max-width: 480px) {
+    .modal, .signInModal {
+        width: 95%;
+        padding: 15px;
+    }
 
+    .modalTitle, .signInModalTitle {
+        font-size: 1.8rem;
+    }
+
+    .modalLogo {
+        width: 60px;
+    }
+
+    .email, .password {
+        height: 40px;
+        font-size: 0.9rem;
+    }
+
+    .signInButton, .googleSignInButton {
+        height: 40px;
+        font-size: 0.9rem;
+    }
+}
