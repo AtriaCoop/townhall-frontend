@@ -5,7 +5,6 @@ export default function Profile() {
     return (
         <div className="profile">
             <Navigation />
-            <Footer />
         </div>
     )
 }

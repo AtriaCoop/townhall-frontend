@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../styles/loading.module.scss';
+import { useRouter } from 'next/router'
 
 export default function Loading() {
     const [visibleLogos, setVisibleLogos] = useState([]);
@@ -30,6 +31,14 @@ export default function Loading() {
         return () => clearTimeout(); // Cleanup
     }, []);
 
+    // Navigation
+    const router = useRouter();
+    
+    const handleSignIn = () => {
+        event.preventDefault();
+        router.push('/profile');
+    }
+
     return (
         <div className={styles.loading}>
             {!showScreen ? (
@@ -50,6 +59,7 @@ export default function Loading() {
                     <button className={`${styles.button} ${styles.individualButton}`} onClick={() => setShowIndividualScreen(true)}>Individual</button>
                     <button className={`${styles.button} ${styles.organizationButton}`} onClick={() => setShowOrganizationScreen(true)}>Organization</button>
                     <p className={styles.modalFooter}>Already have an account? <a className={styles.signIn} href="#" onClick={(e) => {e.preventDefault(); setShowSignInScreen(true)}}>Sign in</a></p>
+                </div>
                 
             ) : showSignInScreen ? (
 
@@ -73,7 +83,7 @@ export default function Loading() {
                         </div>
                         <a className={styles.forgotPw} href="#" onClick={(e) => e.preventDefault()}>Forgot password?</a>
                         </div>
-                        <button type="submit" className={styles.signInButton}>Sign In</button>
+                        <button type="submit" className={styles.signInButton} onClick={handleSignIn}>Sign In</button>
                         <button type="button" className={styles.googleSignInButton}>
                         <img className={styles.googleLogo} src="/assets/googleLogo.png" alt="Google Icon" />
                         Sign in with Google
