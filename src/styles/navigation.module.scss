@@ -1,10 +1,56 @@
 .navigation {
   padding: 1rem;
   border-bottom: solid silver;
+}
 
-  img {
-    height: 14vh;
-  }
+.logo {
+  width: 110px;
+  height: 105px;
+}
+
+.searchBar {
+  margin-left: 2rem;
+}
+
+.searchInput {
+  width: 170px;
+  height: 39px;
+  padding-left: 2rem;
+}
+
+.magnifyGlass {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 17px;
+  height: 17px;
+}
+
+.magnifyGlassMobile {
+  position: absolute;
+  left: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.navItem {
+  color: white;
+  width: 189px;
+  height: 57px;
+  background-color: #01617B;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.navLink {
+  color: white;
+  text-decoration: none;
 }
 
 .navbarCollapse {
@@ -29,4 +75,35 @@
   opacity: 1;
   visibility: visible; // Makes the menu visible when open
   transform: translateY(0); // Smooth slide effect
+}
+
+.rightSideChatIcon {
+  width: 51px;
+  height: 51px;
+  margin-right: 20px;
+}
+
+.rightSideNotiIcon {
+  width: 41px;
+  height: 51px;
+  margin-right: 20px;
+}
+
+.rightSideProfileIcon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.rightSideIconMobile {
+  width: 30px;
+  height: 30px;
+}
+
+.rightSideIconProfileMobile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
