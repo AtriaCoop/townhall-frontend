@@ -1,5 +1,4 @@
-import Loading from '@/components/loading/loading.jsx';
-import Navigation from '@/components/navigation/navigation';
+import Loading from './loading/loading';
 
 export default function Home() {
   return (
