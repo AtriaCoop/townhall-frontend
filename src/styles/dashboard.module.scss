@@ -1,0 +1,187 @@
+.dashboardWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.dashboardContainer {
+    width: 736px;
+    height: 848px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    background-color: #f9f9f9;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.mainContent {
+    flex: 3;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.organizationInfo {
+    text-align: center;
+    .logo {
+        width: 80px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+    h1 {
+        font-size: 1.8rem;
+        margin: 10px 0;
+    }
+    .subtitle {
+        color: #888;
+        font-size: 0.9rem;
+    }
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    button {
+        flex: 1;
+        padding: 10px;
+        background: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        font-size: 1rem;
+        cursor: pointer;
+        &:hover,
+        &:focus {
+            border-bottom: 2px solid #007bff;
+        }
+    }
+}
+
+.descriptionText {
+    font-size: 1rem;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+.partnersSection {
+    margin-top: 20px;
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+    .partnerLogos {
+        display: flex;
+        justify-content: space-around;
+        img {
+            width: 60px;
+            height: auto;
+        }
+    }
+    .seeAllMembers {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        &:hover {
+            background: #0056b3;
+        }
+    }
+}
+
+.additionalInfo {
+    margin-top: 20px;
+    .infoTabs {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        button {
+            flex: 1;
+            padding: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            &:hover {
+                color: #007bff;
+            }
+        }
+    }
+    a {
+        color: #007bff;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.recentPosts {
+    margin-top: 20px;
+    .postCard {
+        background: #f8f8f8;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.sidebar {
+    flex: 1;
+    margin-left: 20px;
+    .followButton,
+    .messageButton,
+    .joinButton {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .followButton {
+        background: #007bff;
+        color: #fff;
+    }
+    .messageButton {
+        background: #6c757d;
+        color: #fff;
+    }
+    .joinButton {
+        background: #dc3545;
+        color: #fff;
+    }
+
+    .opportunitiesSection,
+    .eventsSection,
+    .followersSection {
+        margin-top: 20px;
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            li {
+                margin-bottom: 10px;
+                font-size: 0.9rem;
+                color: #555;
+            }
+            a {
+                color: #007bff;
+                text-decoration: none;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

@@ -1,10 +1,11 @@
+import OrganizationDashboard from '@/components/organizationDashboard/organizationDashboard.jsx';
 import Navigation from '../../components/navigation/navigation.jsx';
-import Footer from '../../components/footer/footer.jsx';
 
 export default function Profile() {
     return (
         <div className="profile">
             <Navigation />
+            <OrganizationDashboard />
         </div>
     )
 }
