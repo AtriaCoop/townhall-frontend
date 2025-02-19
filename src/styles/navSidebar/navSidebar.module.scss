@@ -1,0 +1,23 @@
+.navSidebar {
+    position: relative;
+    left: 30px;
+    top: 30px;
+    width: 267px;
+
+    text-align: right;
+}
+
+.sidebarHeader {
+    display: inline-flex;
+    background-color: #FED351;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    width: 267px;
+    height: 80px;
+
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 800;
+    font-size: x-large;
+}
