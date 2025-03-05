@@ -1,9 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/profilePage.module.scss";
 
 export default function ProfilePage() {
     const [activeTab, setActiveTab] = useState("skills");
     const [activeContributionsTab, setActiveContributionsTab] = useState("contributions");
+    const [profileData, setProfileData] = useState(null)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        async function fetchProfile() {
+            try {
+                const response = await fetch("http://127.0.0.1:8000/volunteer/?id=1");
+                const data = await response.json();
+                setProfileData(data);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching profile data:", error);
+                setLoading(false);
+            }
+        }
+        fetchProfile();
+    }, [])
 
     return (
         <div className={styles.profilePageWrapper}>
@@ -17,7 +34,21 @@ export default function ProfilePage() {
                             className={styles.profilePicture}
                         />
                         <div className={styles.profileInfo}>
-                            <h1 className={styles.profileName}>Evan Sidwell</h1>
+                            <div className={styles.profileName}>
+                                {/* Conditional rendering of profile data*/}
+                                {profileData ? (
+                                    <div>
+                                        <h1>
+                                            {profileData.first_name} {profileData.last_name} ({profileData.gender})
+                                        </h1>
+                                        <p>
+                                            {profileData.email}
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <p>Loading...</p>
+                                )}
+                            </div>
                             <p className={styles.tagline}>Foodie with a passion for adventure.</p>
                             <p className={styles.location}>Kitsilano Area</p>
                         </div>
