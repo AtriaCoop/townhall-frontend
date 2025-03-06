@@ -8,6 +8,15 @@ export default function Loading() {
     const [showSignInScreen, setShowSignInScreen] = useState(false);
     const [showIndividualScreen, setShowIndividualScreen] = useState(false);
     const [showOrganizationScreen, setShowOrganizationScreen] = useState(false);
+    const [formData, setFormData] = useState({
+        fullName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        gender: "",
+    });
+    const [error, setError] = useState(null);
+    const [successful, setSuccessful] = useState(null);
 
     useEffect(() => {
         const logoSequence = [
@@ -33,6 +42,90 @@ export default function Loading() {
 
     // Navigation
     const router = useRouter();
+
+    // Signing up
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (formData.password.length < 11) {
+            setError("Password must be at least 11 characters long");
+            return;
+        }
+
+        if (!isNaN(formData.password)) {
+            setError("Password cannot be entirely numeric");
+            return;
+        }
+    
+        if (formData.password !== formData.confirmPassword) {
+            setError("Passwords do not match.");
+            return;
+        }
+    
+        // Split full name into first and last name
+        const nameParts = formData.fullName.trim().split(" ");
+        if (nameParts.length < 2) {
+            setError("Please enter both first and last name.");
+            return;
+        }
+        const firstName = nameParts[0];
+        const lastName = nameParts.slice(1).join(" ");
+    
+        try {
+            const response = await fetch("http://127.0.0.1:8000/volunteer/create_volunteer/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    first_name: firstName,
+                    last_name: lastName,
+                    email: formData.email,
+                    password: formData.password,
+                    gender: formData.gender,  // assuming you have this field in state
+                }),
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Success:", data);
+                setSuccessful("Account created successfully! Redirecting...");
+                setTimeout(() => {
+                    setShowIndividualScreen(false);
+                    setShowSignInScreen(true);
+                }, 2000)
+    
+                // Reset form fields
+                setFormData({
+                    fullName: "",
+                    email: "",
+                    password: "",
+                    confirmPassword: "",
+                    gender: "",
+                });
+                setError(null);
+            } else {
+                const errorData = await response.json();
+                // Check if the error is about the email
+                if (errorData.email) {
+                    setError("The email has already been used.");
+                } else {
+                    setError("Something went wrong. Please try again.");
+                }
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            setError("Something went wrong. Please try again.");
+        }
+    };
+    
     
     const handleSignIn = () => {
         event.preventDefault();
@@ -100,22 +193,31 @@ export default function Loading() {
                 <div className={styles.formModal}>
                     <h1 className={styles.formModalTitle}>Create an Account</h1>
                     <img className={styles.modalLogo} src="/assets/logo.png" alt="App Logo" />
-                    <form className={styles.form}>
+                    <form className={styles.form} onSubmit={handleSubmit}>
                         <div className={styles.inputGroup}>
-                        <label htmlFor="fullName"></label>
-                        <input className={styles.email} type="text" id="fullName" name="fullName" placeholder="First & Last Name" />
+                            <label htmlFor="fullName"></label>
+                            <input className={styles.email} type="text" id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="First & Last Name" required/>
                         </div>
                         <div className={styles.inputGroup}>
-                        <label htmlFor="email"></label>
-                        <input className={styles.password} type="email" id="email" name="email" placeholder="Email Address" />
+                            <label htmlFor="email"></label>
+                            <input className={styles.password} type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" required/>
                         </div>
                         <div className={styles.inputGroup}>
-                        <label htmlFor="password"></label>
-                        <input className={styles.password} type="password" id="password" name="password" placeholder="Password" />
+                            <label htmlFor="password"></label>
+                            <input className={styles.password} type="password" id="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required/>
                         </div>
                         <div className={styles.inputGroup}>
-                        <label htmlFor="confirmPassword"></label>
-                        <input className={styles.password} type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" />
+                            <label htmlFor="confirmPassword"></label>
+                            <input className={styles.password} type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder="Confirm Password" required/>
+                        </div>
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="gender"></label>
+                            <select name="gender" id="gneder" value={formData.gender} onChange={handleChange} required>
+                                <option value="">Select Gender</option>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                                <option value="O">Other</option>
+                            </select>
                         </div>
                         <div className={styles.options}>
                         <div>
@@ -124,6 +226,8 @@ export default function Loading() {
                         </div>
                         <a className={styles.forgotPw} href="#" onClick={(e) => e.preventDefault()}>Forgot password?</a>
                         </div>
+                        {error && <p className={styles.error}>{error}</p>}
+                        {successful && <p className={styles.successful}>{successful}</p>} 
                         <button type="submit" className={styles.signInButton}>Sign Up</button>
                     </form>
                         <p className={styles.signInFooter}>
