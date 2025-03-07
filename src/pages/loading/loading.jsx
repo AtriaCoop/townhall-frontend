@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../styles/loading.module.scss';
 import { useRouter } from 'next/router'
+import { validatePassword, registerUser } from '../../utils/authHelpers';
 
 export default function Loading() {
     const [visibleLogos, setVisibleLogos] = useState([]);
@@ -54,78 +55,32 @@ export default function Loading() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (formData.password.length < 11) {
-            setError("Password must be at least 11 characters long");
+        const validationError = validatePassword(formData.password, formData.confirmPassword);
+        if (validationError) {
+            setError(validationError);
             return;
         }
 
-        if (!isNaN(formData.password)) {
-            setError("Password cannot be entirely numeric");
-            return;
-        }
-    
-        if (formData.password !== formData.confirmPassword) {
-            setError("Passwords do not match.");
-            return;
-        }
-    
-        // Split full name into first and last name
-        const nameParts = formData.fullName.trim().split(" ");
-        if (nameParts.length < 2) {
-            setError("Please enter both first and last name.");
-            return;
-        }
-        const firstName = nameParts[0];
-        const lastName = nameParts.slice(1).join(" ");
-    
-        try {
-            const response = await fetch("http://127.0.0.1:8000/volunteer/create_volunteer/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    first_name: firstName,
-                    last_name: lastName,
-                    email: formData.email,
-                    password: formData.password,
-                    gender: formData.gender,  // assuming you have this field in state
-                }),
+        const result = await registerUser(formData);
+
+        if (result.error) {
+            setError(result.error);
+        } else {
+            setSuccessful(result.success);
+            setTimeout(() => {
+                setShowIndividualScreen(false);
+                setShowSignInScreen(true);
+            }, 2000);
+            setFormData({
+                fullName: "",
+                email: "",
+                password: "",
+                confirmPassword: "",
+                gender: "",
             });
-    
-            if (response.ok) {
-                const data = await response.json();
-                console.log("Success:", data);
-                setSuccessful("Account created successfully! Redirecting...");
-                setTimeout(() => {
-                    setShowIndividualScreen(false);
-                    setShowSignInScreen(true);
-                }, 2000)
-    
-                // Reset form fields
-                setFormData({
-                    fullName: "",
-                    email: "",
-                    password: "",
-                    confirmPassword: "",
-                    gender: "",
-                });
-                setError(null);
-            } else {
-                const errorData = await response.json();
-                // Check if the error is about the email
-                if (errorData.email) {
-                    setError("The email has already been used.");
-                } else {
-                    setError("Something went wrong. Please try again.");
-                }
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            setError("Something went wrong. Please try again.");
+            setError(null);
         }
     };
-    
     
     const handleSignIn = () => {
         event.preventDefault();
