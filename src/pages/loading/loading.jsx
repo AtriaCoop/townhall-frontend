@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../styles/loading.module.scss';
 import { useRouter } from 'next/router'
+import { validatePassword, registerUser } from '../../utils/authHelpers';
 
 export default function Loading() {
     const [visibleLogos, setVisibleLogos] = useState([]);
@@ -8,6 +9,15 @@ export default function Loading() {
     const [showSignInScreen, setShowSignInScreen] = useState(false);
     const [showIndividualScreen, setShowIndividualScreen] = useState(false);
     const [showOrganizationScreen, setShowOrganizationScreen] = useState(false);
+    const [formData, setFormData] = useState({
+        fullName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        gender: "",
+    });
+    const [error, setError] = useState(null);
+    const [successful, setSuccessful] = useState(null);
 
     useEffect(() => {
         const logoSequence = [
@@ -33,6 +43,44 @@ export default function Loading() {
 
     // Navigation
     const router = useRouter();
+
+    // Signing up
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const validationError = validatePassword(formData.password, formData.confirmPassword);
+        if (validationError) {
+            setError(validationError);
+            return;
+        }
+
+        const result = await registerUser(formData);
+
+        if (result.error) {
+            setError(result.error);
+        } else {
+            setSuccessful(result.success);
+            setTimeout(() => {
+                setShowIndividualScreen(false);
+                setShowSignInScreen(true);
+            }, 2000);
+            setFormData({
+                fullName: "",
+                email: "",
+                password: "",
+                confirmPassword: "",
+                gender: "",
+            });
+            setError(null);
+        }
+    };
     
     const handleSignIn = () => {
         event.preventDefault();
@@ -100,22 +148,31 @@ export default function Loading() {
                 <div className={styles.formModal}>
                     <h1 className={styles.formModalTitle}>Create an Account</h1>
                     <img className={styles.modalLogo} src="/assets/logo.png" alt="App Logo" />
-                    <form className={styles.form}>
+                    <form className={styles.form} onSubmit={handleSubmit}>
                         <div className={styles.inputGroup}>
-                        <label htmlFor="fullName"></label>
-                        <input className={styles.email} type="text" id="fullName" name="fullName" placeholder="First & Last Name" />
+                            <label htmlFor="fullName"></label>
+                            <input className={styles.email} type="text" id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="First & Last Name" required/>
                         </div>
                         <div className={styles.inputGroup}>
-                        <label htmlFor="email"></label>
-                        <input className={styles.password} type="email" id="email" name="email" placeholder="Email Address" />
+                            <label htmlFor="email"></label>
+                            <input className={styles.password} type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" required/>
                         </div>
                         <div className={styles.inputGroup}>
-                        <label htmlFor="password"></label>
-                        <input className={styles.password} type="password" id="password" name="password" placeholder="Password" />
+                            <label htmlFor="password"></label>
+                            <input className={styles.password} type="password" id="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required/>
                         </div>
                         <div className={styles.inputGroup}>
-                        <label htmlFor="confirmPassword"></label>
-                        <input className={styles.password} type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" />
+                            <label htmlFor="confirmPassword"></label>
+                            <input className={styles.password} type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder="Confirm Password" required/>
+                        </div>
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="gender"></label>
+                            <select name="gender" id="gneder" value={formData.gender} onChange={handleChange} required>
+                                <option value="">Select Gender</option>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                                <option value="O">Other</option>
+                            </select>
                         </div>
                         <div className={styles.options}>
                         <div>
@@ -124,6 +181,8 @@ export default function Loading() {
                         </div>
                         <a className={styles.forgotPw} href="#" onClick={(e) => e.preventDefault()}>Forgot password?</a>
                         </div>
+                        {error && <p className={styles.error}>{error}</p>}
+                        {successful && <p className={styles.successful}>{successful}</p>} 
                         <button type="submit" className={styles.signInButton}>Sign Up</button>
                     </form>
                         <p className={styles.signInFooter}>
