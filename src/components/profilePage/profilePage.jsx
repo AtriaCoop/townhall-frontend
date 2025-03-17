@@ -10,9 +10,9 @@ export default function ProfilePage() {
     useEffect(() => {
         async function fetchProfile() {
             try {
-                const response = await fetch("http://127.0.0.1:8000/volunteer/?id=1");
+                const response = await fetch("http://127.0.0.1:8000/volunteer/1/");
                 const data = await response.json();
-                setProfileData(data);
+                setProfileData(data.volunteer);
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching profile data:", error);
