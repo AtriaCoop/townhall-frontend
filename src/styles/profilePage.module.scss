@@ -2,11 +2,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
 }
 
 .profilePageContainer {
-    width: 800px;
+    width: 100%;
+    max-width: 800px;
     border-radius: 10px;
     background-color: #F4F2EE;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -117,6 +117,7 @@
 
 /* Sidebar */
 .sidebar {
+    max-width: 100%;
     padding: 20px;
 
     .editProfileButton,
