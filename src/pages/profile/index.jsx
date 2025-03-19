@@ -7,8 +7,10 @@ export default function Profile() {
     return (
         <div className="profile">
             <Navigation />
-            <ProfilePage />
-            <NavSidebar />
+            <div className='d-flex flex-row-reverse justify-content-end p-4 gap-5'>
+                <ProfilePage />
+                <NavSidebar />
+            </div>
         </div>
     )
 }
