@@ -18,6 +18,7 @@ export default function Loading() {
     });
     const [error, setError] = useState(null);
     const [successful, setSuccessful] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const logoSequence = [
@@ -82,10 +83,43 @@ export default function Loading() {
         }
     };
     
-    const handleSignIn = () => {
-        event.preventDefault();
-        router.push('/profile');
+const handleSignIn = async (event) => {
+    event.preventDefault();
+    
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    setLoading(true);
+
+    try {
+        const response = await fetch("http://127.0.0.1:8000/auth/login/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            localStorage.setItem("user", JSON.stringify(data.user));  // Store user data
+
+            setTimeout(() => {
+                setLoading(false)
+                router.push(`/profile`);  // Redirect to user's profile
+            }, 1500)
+
+        } else {
+            setLoading(false)
+            setError(data.error || "Invalid email or password");
+        }
+    } catch (error) {
+        setLoading(false)
+        setError("An error occurred while signing in. Please try again.");
     }
+};
+
 
     return (
         <div className={styles.loading}>
@@ -131,7 +165,10 @@ export default function Loading() {
                         </div>
                         <a className={styles.forgotPw} href="#" onClick={(e) => e.preventDefault()}>Forgot password?</a>
                         </div>
-                        <button type="submit" className={styles.signInButton} onClick={handleSignIn}>Sign In</button>
+                        {error && <p className={styles.error}>{error}</p>}
+                        <button type="submit" className={styles.signInButton} onClick={handleSignIn} disabled={loading}>
+                        {loading ? "Signing in..." : "Sign In"}  {/* ✅ Button Text Change */}
+                        </button>
                         <button type="button" className={styles.googleSignInButton}>
                         <img className={styles.googleLogo} src="/assets/googleLogo.png" alt="Google Icon" />
                         Sign in with Google
