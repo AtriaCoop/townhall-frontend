@@ -21,7 +21,7 @@ export const registerUser = async (formData) => {
     const lastName = nameParts.slice(1).join(" ");
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/volunteer/create_volunteer/", {
+        const response = await fetch("http://127.0.0.1:8000/volunteer/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
