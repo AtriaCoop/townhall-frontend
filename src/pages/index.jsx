@@ -1,9 +1,9 @@
-import Loading from './loading/loading';
+import HomeContent from './home/home';
 
 export default function Home() {
   return (
     <div className="home">
-      <Loading />
+      <HomeContent />
     </div>
   );
 }

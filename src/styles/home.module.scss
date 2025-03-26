@@ -1,0 +1,77 @@
+.homeContent {
+    font-family: Arial, sans-serif;
+  }
+  
+  .hero {
+    background: url('/assets/loading.png') center/cover no-repeat;
+    color: white;
+    padding: 100px 30px;
+  
+    .heroOverlay {
+      max-width: 800px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 8px;
+    }
+  
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+  
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+  }
+  
+  .ctaButton {
+    background-color: #f97316;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  
+  .section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 30px;
+    gap: 40px;
+  
+    img {
+      width: 50%;
+      border-radius: 10px;
+    }
+  }
+  
+  .volunteer {
+    flex-direction: row;
+  }
+  
+  .organization {
+    flex-direction: row;
+  }
+
+  .about {
+    flex-direction: row-reverse;
+  }
+  
+  .sectionText {
+    max-width: 50%;
+  
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+  
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: #444;
+    }
+  }
+  
