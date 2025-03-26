@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "../../styles/profilePage.module.scss";
 
 export default function ProfilePage() {
@@ -10,17 +10,24 @@ export default function ProfilePage() {
     useEffect(() => {
         async function fetchProfile() {
             try {
-                const response = await fetch("http://127.0.0.1:8000/volunteer/1/");
+                const user = JSON.parse(localStorage.getItem("user"));
+                if (!user || !user.id) {
+                    console.error("No user found in localStorage.");
+                    return;
+                }
+
+                const response = await fetch(`http://127.0.0.1:8000/volunteer/${user.id}/`);
                 const data = await response.json();
                 setProfileData(data.volunteer);
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching profile data:", error);
-                setLoading(false);
+                setLoading(false)
             }
         }
         fetchProfile();
     }, [])
+    
 
     return (
         <div className={styles.profilePageWrapper}>
